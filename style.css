@@ -2232,7 +2232,7 @@ body::before {
   --z-overlay: 900;
   --z-header: 1100;
   --z-mini-player: 1200;
-  --z-full-player: 2000;
+  --z-full-player: 1000;
   --z-modal: 3000;
 }
 
