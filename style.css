@@ -2225,20 +2225,15 @@ body::before {
 }
 
 /* ========================================= */
-/* ROOT + Z-INDEX SYSTEM (FIX TOTAL)         */
+/* Z-INDEX SYSTEM (WAJIB BENER)              */
 /* ========================================= */
 :root {
-  --header-height: 64px;
-  --mini-player-height: 90px;
-
-  --z-overlay: 900;
   --z-sidebar: 1000;
+  --z-overlay: 900;
   --z-header: 1100;
   --z-mini-player: 1200;
-  --z-full-player: 5000;
-  --z-modal: 6000;
-
-  --transition: 0.3s ease;
+  --z-full-player: 2000;
+  --z-modal: 3000;
 }
 
 /* ========================================= */
@@ -2247,28 +2242,28 @@ body::before {
 @media (max-width: 1024px) {
 
   .song-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 16px;
   }
 
   .full-player-content {
     flex-direction: column;
     text-align: center;
-    gap: 28px;
+    gap: 32px;
   }
 
   .full-disc {
-    width: 240px;
-    height: 240px;
+    width: 260px;
+    height: 260px;
   }
 
   .hero-title {
-    font-size: 28px;
+    font-size: 30px;
   }
 }
 
 /* ========================================= */
-/* MOBILE (CLEAN + NO OVERLAP)               */
+/* MOBILE CLEAN VERSION                      */
 /* ========================================= */
 @media (max-width: 768px) {
 
@@ -2279,21 +2274,18 @@ body::before {
     top: 0;
     left: 0;
     right: 0;
-    height: var(--header-height);
     z-index: var(--z-header);
-    background: rgba(15,15,25,0.95);
-    backdrop-filter: blur(20px);
   }
 
   /* SIDEBAR */
   .sidebar {
     position: fixed;
     top: 0;
-    left: -260px;
+    left: -280px;
     width: 260px;
     height: 100vh;
     z-index: var(--z-sidebar);
-    transition: left var(--transition);
+    transition: left 0.3s ease;
   }
 
   .sidebar.open {
@@ -2306,10 +2298,9 @@ body::before {
     inset: 0;
     background: rgba(0,0,0,0.5);
     z-index: var(--z-overlay);
-
     opacity: 0;
     pointer-events: none;
-    transition: var(--transition);
+    transition: 0.3s;
   }
 
   .mobile-overlay.active {
@@ -2317,11 +2308,11 @@ body::before {
     pointer-events: auto;
   }
 
-  /* MAIN CONTENT */
+  /* MAIN */
   .main-content {
     padding: 16px;
-    padding-top: calc(var(--header-height) + 16px);
-    padding-bottom: calc(var(--mini-player-height) + 16px);
+    padding-top: 70px;
+    padding-bottom: 110px;
   }
 
   /* MINI PLAYER */
@@ -2330,71 +2321,16 @@ body::before {
     bottom: 0;
     left: 0;
     right: 0;
-    height: var(--mini-player-height);
     z-index: var(--z-mini-player);
   }
 
-  /* tombol tetap bisa diklik */
-  .mini-player button {
-    position: relative;
-    z-index: calc(var(--z-mini-player) + 1);
-  }
-
-  .mini-progress {
-    pointer-events: none;
-  }
-
-  /* ===================================== */
-  /* FULL PLAYER (INI YANG BIKIN GAK ERROR) */
-  /* ===================================== */
-
+  /* FULL PLAYER (INI KUNCI FIX) */
   .full-player {
-    position: fixed;
-    inset: 0;
-    background: #0f0f1a;
     z-index: var(--z-full-player);
-
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-
-    transform: translateY(100%);
-    transition: all 0.4s ease;
-  }
-
-  .full-player.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-
-    transform: translateY(0);
   }
 
   .full-player-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     z-index: calc(var(--z-full-player) + 1);
-  }
-
-  /* PLAYER CONTENT */
-  .full-player-content {
-    padding: 20px;
-    gap: 20px;
-    text-align: center;
-  }
-
-  .full-disc {
-    width: 200px;
-    height: 200px;
-  }
-
-  .full-song-title {
-    font-size: 20px;
-  }
-
-  .full-controls {
-    gap: 12px;
   }
 
   /* HERO */
@@ -2423,16 +2359,36 @@ body::before {
     grid-template-columns: 1fr;
   }
 
-  /* FIX LAYER NUTUP */
+  /* PLAYER MOBILE */
+  .full-player-content {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .full-disc {
+    width: 200px;
+    height: 200px;
+  }
+
+  .full-song-title {
+    font-size: 20px;
+  }
+
+  /* CONTROLS */
+  .full-controls {
+    gap: 12px;
+  }
+
+  /* BUTTON FIX */
+  button {
+    touch-action: manipulation;
+  }
+
+  /* PENTING: JANGAN ADA LAYER NUTUP */
   .hero-overlay,
   .full-player-overlay,
   .full-player-bg {
     pointer-events: none;
-  }
-
-  /* TOUCH FIX */
-  button {
-    touch-action: manipulation;
   }
 }
 
